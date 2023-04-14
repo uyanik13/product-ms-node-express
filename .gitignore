@@ -1,0 +1,23 @@
+# node artifact files
+node_modules/
+dist/
+build/
+
+#environment variable
+.env
+
+# Log files
+/logs
+*.log
+
+# coverage
+/coverage
+
+# editor settings
+.vscode
+
+
+## documentation
+documentation
+
+prebuild
