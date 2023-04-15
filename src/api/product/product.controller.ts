@@ -25,8 +25,7 @@ export class ProductController {
 
   async create(req: Request, res: Response): Promise<Response> {
     try {
-      const { name, description, price } = req.body;
-      const newProduct = await this.productService.createProduct(name, description, price);
+      const newProduct = await this.productService.createProduct(req.body);
       return res.status(201).json(newProduct);
     } catch (error: any) {
       return res.status(500).json({ message: error.message });

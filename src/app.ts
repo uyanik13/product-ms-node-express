@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
 import 'dotenv/config';
+const fileUpload = require('express-fileupload')
 import cors from 'cors';
 import helmet from 'helmet';
 import hpp from 'hpp';
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.raw());
 app.use(express.text());
+app.use(fileUpload())
 app.use(cors());
 app.use(helmet()); //Adds extra headers to protect the routes
 app.use(hpp()); //To prevent HTTP Parameter Pollution.

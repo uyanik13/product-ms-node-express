@@ -1,10 +1,10 @@
 import { Model, Column, Table, PrimaryKey, AutoIncrement, DataType } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'product_categories',
+  tableName: 'shippings',
   timestamps: false,
 })
-class ProductCategory extends Model {
+class Shipping extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
@@ -14,7 +14,10 @@ class ProductCategory extends Model {
   public name!: string;
 
   @Column(DataType.STRING)
-  public desc!: string;
+  public shipping_company!: string;
+
+  @Column(DataType.DECIMAL)
+  public price!: number;
 
   @Column(DataType.DATE)
   public readonly createdAt!: Date;
@@ -23,5 +26,4 @@ class ProductCategory extends Model {
   public readonly updatedAt!: Date;
 }
 
-
-export default ProductCategory;
+export default Shipping;

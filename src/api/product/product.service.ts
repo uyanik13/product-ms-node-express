@@ -1,7 +1,13 @@
 import Product from './product.model';
+import ProductImage from '../product-image/product-image.model';
+import AppLogger from '../../core/eventLogger';
+import ProductShipping from '../product-shipping/product-shipping.model';
+
+let logger = new AppLogger();
 
 export class ProductService {
   private readonly products: Product[] = [];
+  private readonly productImages: ProductImage[] = [];
 
   async getProducts(): Promise<Product[]> {
     try {
@@ -20,13 +26,32 @@ export class ProductService {
     return product;
   }
 
-  async createProduct(name: string, description: string, price: number): Promise<Product> {
+  async createProduct(productData : any): Promise<Product> {
     try {
-      const product = await Product.create({
-        name,
-        description,
-        price,
+      const { name, category_id, content, status, stock, sku, price, discount_id, shipping_id } = productData;
+      
+      const product =  await Product.create({
+        name, category_id,content,status,
+        stock, sku, price, discount_id
       });
+      
+      const createdProduct = await Product.findByPk(product.id);
+      
+      if (createdProduct) {
+        try {
+          await ProductShipping.upsert({
+            product_id: product.id,
+            shipping_id: shipping_id,
+          });
+        } catch (error) {
+          throw new Error(`Failed to create ProductShipping: ${error}`);
+        }
+      }
+      
+
+      
+      //this.setRelations(productData, product)
+
       return product;
     } catch (error) {
       throw new Error(`Failed to create product: ${error}`);
@@ -57,6 +82,21 @@ export class ProductService {
       throw new Error(`Failed to delete product with id: ${id}`);
     }
   }
+
+  async setRelations(productData: Product, createdProduct: Product): Promise<void> {
+    console.log('test', JSON.stringify(productData));
+    // if (productData.images && productData.images.length > 0) {
+    //   productData.images.forEach((image) => {
+    //     console.log('image', '2222');
+    //   });
+    // }
+
+    if (Number.isInteger(productData.shipping_id)) {
+      // set product_shipping table
+
+    }
+  }
+
 }
 
 export default new ProductService();

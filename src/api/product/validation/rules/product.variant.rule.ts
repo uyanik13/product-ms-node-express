@@ -10,13 +10,12 @@ interface ProductVariant {
 
 
 const productVariantRule: CustomValidator = (value, { req }) => {
-  const decodedArray = JSON.parse(value);
-
-  if (!Array.isArray(decodedArray)) {
+  
+  if (!Array.isArray(value)) {
     throw new Error('Product variants must be an array');
   }
 
-  decodedArray.forEach((item) => {
+  value.forEach((item) => {
     if (!isPlainObject(item)) {
       throw new Error('Product variant must be an object');
     }
@@ -42,5 +41,6 @@ const productVariantRule: CustomValidator = (value, { req }) => {
 
   return true;
 };
+
 
 export default productVariantRule;

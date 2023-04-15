@@ -1,6 +1,9 @@
-import { Model, Column, Table, PrimaryKey, AutoIncrement, DataType, ForeignKey, AllowNull } from 'sequelize-typescript';
+import { Model, Column, Table, HasOne, HasMany, PrimaryKey, AutoIncrement, DataType, ForeignKey, AllowNull } from 'sequelize-typescript';
 import ProductCategory from '../product-category/product-category.model';
 import Discount from '../discount/discount.model';
+import Shipping from '../shipping/shipping.model';
+import ProductShipping from '../product-shipping/product-shipping.model';
+import ProductImage from '../product-image/product-image.model';
 
 @Table({
   tableName: 'products',
@@ -32,18 +35,29 @@ class Product extends Model {
   @Column(DataType.INTEGER)
   public stock!: number;
 
-  @ForeignKey(() => ProductCategory) // Replace with the name of your ProductCategory class
+  @ForeignKey(() => ProductCategory)
   @AllowNull(false)
   @Column(DataType.INTEGER.UNSIGNED)
   public category_id!: number;
 
-  @ForeignKey(() => Discount) // Replace with the name of your Discount class
+  @ForeignKey(() => Discount) 
   @AllowNull(false)
   @Column(DataType.INTEGER.UNSIGNED)
   public discount_id!: number;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
   public status!: boolean;
+
+  @HasMany(() => ProductImage)
+  public images!: ProductImage[];
+
+  // @AllowNull(true)
+  // @ForeignKey(() => Shipping)
+  // @Column(DataType.INTEGER)
+  // public shipping_id!: number;
+
+  @HasOne(() => ProductShipping)
+  public readonly productShipping!: ProductShipping;
 
   @Column(DataType.DATE)
   public readonly created_at!: Date;

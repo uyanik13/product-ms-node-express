@@ -1,5 +1,4 @@
 import { Model, Column, Table, PrimaryKey, AutoIncrement, DataType } from 'sequelize-typescript';
-import sequelize from '../../config/database';
 
 @Table({
   tableName: 'discounts',
