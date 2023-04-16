@@ -6,7 +6,7 @@ import 'reflect-metadata';
 
 let logger = new AppLogger();
 let scope = 'index.ts';
-const port = 3000
+const port = 3001
 
 sequelize
     .authenticate()

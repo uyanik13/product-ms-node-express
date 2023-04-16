@@ -2,22 +2,14 @@ import express, { Router } from 'express';
 import { Request, Response, NextFunction } from 'express';
 import { ProductService } from './product.service';
 import ProductController from './product.controller';
-import { validationResult } from 'express-validator';
 import { productStoreValidationRules } from './validation/product.store.validation';
+import { validateRequest } from '../../middleware/validate-request-middleware';
 
 const router: Router = express.Router();
 const MODULE_NAME = 'product';
 const productService = new ProductService();
 const productController = new ProductController(productService);
 
-
-const validateRequest = (req: Request, res: Response, next: NextFunction): Response | void => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  next();
-};
 
 router.get(`/${MODULE_NAME}`, (req: Request, res: Response) => {
   productController.index(req, res);

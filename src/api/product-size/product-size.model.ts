@@ -1,12 +1,11 @@
 import Product from '../product/product.model';
-import Shipping from '../shipping/shipping.model';
 import { Model, Column, Table, PrimaryKey, AutoIncrement, DataType, ForeignKey, AllowNull } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'product_shippings',
+  tableName: 'product_sizes',
   timestamps: false,
 })
-class ProductShipping extends Model {
+class ProductSize extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
@@ -17,10 +16,20 @@ class ProductShipping extends Model {
   @Column(DataType.INTEGER.UNSIGNED)
   public product_id!: number;
 
-  @ForeignKey(() => Shipping) 
-  @AllowNull(false)
   @Column(DataType.INTEGER.UNSIGNED)
-  public shipping_id!: number;
+  public width!: number;
+
+  @Column(DataType.INTEGER.UNSIGNED)
+  public height!: number;
+
+  @Column(DataType.INTEGER.UNSIGNED)
+  public length!: number;
+
+  @Column(DataType.INTEGER.UNSIGNED)
+  public weight!: number;
+
+  @Column(DataType.STRING)
+  public weight_type!: string;
 
   @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
   public created_at!: Date;
@@ -29,4 +38,4 @@ class ProductShipping extends Model {
   public updated_at!: Date;
 }
 
-export default ProductShipping;
+export default ProductSize;

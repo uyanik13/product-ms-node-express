@@ -1,9 +1,12 @@
 import { CustomValidator } from 'express-validator';
-import { Multer } from 'multer';
 
 const imageValidationRule: CustomValidator = (value, { req }) => {
-  if (!req.files || !req.files['images[]']) {
-    throw new Error('Images must be files');
+  if (!req.files) {
+    throw new Error('Images are required');
+  }
+
+  if (!req.files['images[]'] || req.files['images[]'].length === 0) {
+    throw new Error('Images must be an array with at least one image');
   }
 
   if (!req.files['images[]'].every((file: Express.Multer.File) => file.mimetype.startsWith('image/'))) {
@@ -16,5 +19,6 @@ const imageValidationRule: CustomValidator = (value, { req }) => {
 
   return true;
 };
+
 
 export default imageValidationRule;

@@ -21,11 +21,11 @@ class ProductImage extends Model {
   @Column(DataType.INTEGER)
   public product_id!: number;
 
-  @Column(DataType.DATE)
-  public readonly createdAt!: Date;
+  @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
+  public created_at!: Date;
 
-  @Column(DataType.DATE)
-  public readonly updatedAt!: Date;
+  @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
+  public updated_at!: Date;
 }
 
 

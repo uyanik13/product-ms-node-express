@@ -59,11 +59,11 @@ class Product extends Model {
   @HasOne(() => ProductShipping)
   public readonly productShipping!: ProductShipping;
 
-  @Column(DataType.DATE)
-  public readonly created_at!: Date;
+  @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
+  public created_at!: Date;
 
-  @Column(DataType.DATE)
-  public readonly updated_at!: Date;
+  @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
+  public updated_at!: Date;
 }
 
 export default Product;

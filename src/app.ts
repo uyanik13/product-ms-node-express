@@ -15,11 +15,11 @@ process.on("uncaughtException", (e) => {
   logger.logError(scope, e.toString());
 });
 
+app.use(fileUpload())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.raw());
 app.use(express.text());
-app.use(fileUpload())
 app.use(cors());
 app.use(helmet()); //Adds extra headers to protect the routes
 app.use(hpp()); //To prevent HTTP Parameter Pollution.

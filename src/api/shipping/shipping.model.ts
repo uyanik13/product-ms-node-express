@@ -19,11 +19,11 @@ class Shipping extends Model {
   @Column(DataType.DECIMAL)
   public price!: number;
 
-  @Column(DataType.DATE)
-  public readonly createdAt!: Date;
+  @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
+  public created_at!: Date;
 
-  @Column(DataType.DATE)
-  public readonly updatedAt!: Date;
+  @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
+  public updated_at!: Date;
 }
 
 export default Shipping;

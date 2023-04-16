@@ -1,10 +1,10 @@
 import { Model, Column, Table, PrimaryKey, AutoIncrement, DataType } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'product_categories',
+  tableName: 'product_variants',
   timestamps: false,
 })
-class ProductCategory extends Model {
+class ProductVariant extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
@@ -13,9 +13,6 @@ class ProductCategory extends Model {
   @Column(DataType.STRING)
   public name!: string;
 
-  @Column(DataType.STRING)
-  public desc!: string;
-
   @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
   public created_at!: Date;
 
@@ -23,5 +20,4 @@ class ProductCategory extends Model {
   public updated_at!: Date;
 }
 
-
-export default ProductCategory;
+export default ProductVariant;

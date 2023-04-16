@@ -22,11 +22,11 @@ class Discount extends Model {
   @Column({ type: DataType.INTEGER, defaultValue: 1 })
   public status!: number;
 
-  @Column(DataType.DATE)
-  public readonly createdAt!: Date;
+  @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
+  public created_at!: Date;
 
-  @Column(DataType.DATE)
-  public readonly updatedAt!: Date;
+  @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
+  public updated_at!: Date;
 }
 
 export default Discount;

@@ -1,12 +1,12 @@
+import ProductVariant from '../product-variant/product-variant.model';
 import Product from '../product/product.model';
-import Shipping from '../shipping/shipping.model';
 import { Model, Column, Table, PrimaryKey, AutoIncrement, DataType, ForeignKey, AllowNull } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'product_shippings',
+  tableName: 'product_variant_options',
   timestamps: false,
 })
-class ProductShipping extends Model {
+class ProductVariantOption extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
@@ -17,10 +17,13 @@ class ProductShipping extends Model {
   @Column(DataType.INTEGER.UNSIGNED)
   public product_id!: number;
 
-  @ForeignKey(() => Shipping) 
+  @ForeignKey(() => ProductVariant)
   @AllowNull(false)
   @Column(DataType.INTEGER.UNSIGNED)
-  public shipping_id!: number;
+  public product_variant_id!: number;
+
+  @Column(DataType.STRING)
+  public value!: string;
 
   @Column({ type: DataType.DATE, defaultValue: DataType.NOW })
   public created_at!: Date;
@@ -29,4 +32,4 @@ class ProductShipping extends Model {
   public updated_at!: Date;
 }
 
-export default ProductShipping;
+export default ProductVariantOption;
